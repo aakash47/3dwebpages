@@ -27,7 +27,6 @@ just run index.html file
 
 ```
 
-
 ## The project status
 
 - The project is basically prototype.
@@ -35,5 +34,5 @@ just run index.html file
 ## Sources
 
 - documentation from the (https://threejsfundamentals.org/threejs/lessons/threejs-fundamentals.html)
-- free of cost 3d models (https://sketchfab.com/feed)
+- 3d models (https://sketchfab.com/feed)
 - for cubemap ('http://www.humus.name/index.php?page=Textures')
