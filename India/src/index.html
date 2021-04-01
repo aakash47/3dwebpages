@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="description">
+        <h1>India</h1>
+    </div>
+    <!-- <canvas class="webgl"></canvas> -->
+    <script src="./three.js"></script>
+    <script src="./OrbitControls.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>   
+<script>
+//scene
+    const scene = new THREE.Scene();
+//camera
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+//renderer
+const renderer = new THREE.WebGLRenderer({antialias:true,alpha: true});
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+//map loader
+let loader1 = new THREE.GLTFLoader();
+    loader1.load('./3dModels/india/scene.gltf',function(gltf){
+      scene.add(gltf.scene);
+      map =gltf.scene.children[0];
+      map.scale.set(4,4,4);
+      map.position.set(2,1,0)
+    })
+//flag loader
+let loader2 = new THREE.GLTFLoader();
+    loader2.load('./3dModels/flag_of_india/scene.gltf',function(gltf){
+      scene.add(gltf.scene);
+      flag =gltf.scene.children[0];
+      flag.scale.set(14,14,14);
+      flag.position.set(-82,-2,6)
+    })
+//monument loader
+let loader3 = new THREE.GLTFLoader();
+    loader3.load('./3dModels/taj_mahal/scene.gltf',function(gltf){
+      scene.add(gltf.scene);
+      taj_mahal =gltf.scene.children[0];
+      taj_mahal.scale.set(0.3,0.3,0.3);
+      taj_mahal.position.set(82,2,6)
+    })
+//famous personality loader
+let loader4 = new THREE.GLTFLoader();
+    loader4.load('./3dModels/mahtma_gandhi/scene.gltf',function(gltf){
+      scene.add(gltf.scene);
+      gandhi =gltf.scene.children[0];
+      gandhi.scale.set(28,28,28);
+      gandhi.position.set(22,22,-94)
+    })
+//instrument loader
+let loader6 = new THREE.GLTFLoader();
+    loader6.load('./3dModels/sitar/scene.gltf',function(gltf){
+      scene.add(gltf.scene);
+      sitar =gltf.scene.children[0];
+      sitar.scale.set(28,28,28);
+      sitar.position.set(-82,192,-155)
+      sitar.rotation.z = 3.08;
+    //   taj_mahal.rotation.y = 1.02;
+    })
+camera.position.z = 70;
+//orbit constrols 
+controls = new THREE.OrbitControls(camera,renderer.domElement);
+controls.minDistance=1
+controls.maxDistance=1000
+
+//window resize
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+}
+window.addEventListener('resize', () =>
+{
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+//lights
+const pointLight = new THREE.PointLight(0xe1ff, 2)
+pointLight.position.x = 2
+pointLight.position.y = 28
+pointLight.position.z = 45
+pointLight.intensity=10
+pointLight.position.set(3.86,2,45)
+pointLight.intensity=10
+// scene.add(pointLight)
+// const pointLightHelper1=new THREE.PointLightHelper(pointLight,1)
+// scene.add(pointLightHelper1)
+const light = new THREE.DirectionalLight(0xffffff,1)
+    light.position.set(50,50,100);
+    scene.add(light);
+
+const pointLight3 = new THREE.PointLight(0xff0000,2 )
+pointLight.position.x = 2
+pointLight.position.y = 3
+pointLight.position.z = 4
+pointLight3.position.set(3.13,2,45)
+pointLight3.intensity=10.8
+// scene.add(pointLight3)
+//light helper
+// const pointLightHelper3=new THREE.PointLightHelper(pointLight3,1)
+// // scene.add(pointLightHelper3)
+
+const ambient = new THREE.AmbientLight(0x404040,3);
+    scene.add(ambient);
+//animate function
+const animate = function () {
+requestAnimationFrame( animate );
+// map.rotation.z +=0.001
+// flag.rotation.z +=0.001
+
+renderer.render( scene, camera );
+controls.update()
+			};
+animate();
+
+</script>
+</body>
+</html>

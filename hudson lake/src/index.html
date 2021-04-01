@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="description">
+        <h1>Hudson Lake</h1>
+    </div>
+    <!-- <canvas class="webgl"></canvas> -->
+    <script src="./three.js"></script>
+    <script src="./OrbitControls.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>   
+<script>
+//scene
+    const scene = new THREE.Scene();
+//camera
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 100000);
+//renderer
+const renderer = new THREE.WebGLRenderer({antialias:true,alpha: true});
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+//cube map
+const loader = new THREE.CubeTextureLoader();
+  const texture = loader.load([
+    'cubemap/posx.jpg',
+    'cubemap/negx.jpg',
+    'cubemap/posy.jpg',
+    'cubemap/negy.jpg',
+    'cubemap/posz.jpg',
+    'cubemap/negz.jpg',
+  ]);
+  scene.background = texture;
+camera.position.z = 70;
+//orbit constrols 
+controls = new THREE.OrbitControls(camera,renderer.domElement);
+controls.minDistance=1
+controls.maxDistance=1000
+
+//window resize
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+}
+window.addEventListener('resize', () =>
+{
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+//lights
+const pointLight = new THREE.PointLight(0xe1ff, 2)
+pointLight.position.x = 2
+pointLight.position.y = 28
+pointLight.position.z = 45
+pointLight.intensity=10
+pointLight.position.set(3.86,2,45)
+pointLight.intensity=10
+// scene.add(pointLight)
+const pointLightHelper1=new THREE.PointLightHelper(pointLight,1)
+// scene.add(pointLightHelper1)
+const light = new THREE.DirectionalLight(0xffffff,1)
+    light.position.set(50,50,100);
+    scene.add(light);
+
+const pointLight3 = new THREE.PointLight(0xff0000,2 )
+pointLight.position.x = 2
+pointLight.position.y = 3
+pointLight.position.z = 4
+pointLight3.position.set(3.13,2,45)
+pointLight3.intensity=10.8
+// scene.add(pointLight3)
+//light helper
+const pointLightHelper3=new THREE.PointLightHelper(pointLight3,1)
+// scene.add(pointLightHelper3)
+
+const ambient = new THREE.AmbientLight(0x404040,3);
+    scene.add(ambient);
+//animate function
+const animate = function () {
+requestAnimationFrame( animate );
+// map.rotation.z +=0.001
+// flag.rotation.z +=0.001
+
+renderer.render( scene, camera );
+controls.update()
+			};
+animate();
+// var loader = new THREE.JSONLoader();
+</script>
+</body>
+</html>
