@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="description">
-        <h1>India</h1>
+        <h1>Hudson Lake</h1>
     </div>
     <!-- <canvas class="webgl"></canvas> -->
     <script src="./three.js"></script>
@@ -27,44 +27,46 @@ document.body.appendChild( renderer.domElement );
 
 //map loader
 let loader1 = new THREE.GLTFLoader();
-    loader1.load('./3dModels/india/scene.gltf',function(gltf){
+    loader1.load('./3dModels/usamap/scene.gltf',function(gltf){
       scene.add(gltf.scene);
       map =gltf.scene.children[0];
-      map.scale.set(4,4,4);
-      map.position.set(2,1,0)
+      map.scale.set(8,8,8);
+      map.position.set(4,1,7)
     })
+
 //flag loader
-let loader2 = new THREE.GLTFLoader();
-    loader2.load('./3dModels/flag_of_india/scene.gltf',function(gltf){
+let loader3 = new THREE.GLTFLoader();
+    loader3.load('./3dModels/usaflag/scene.gltf',function(gltf){
       scene.add(gltf.scene);
       flag =gltf.scene.children[0];
-      flag.scale.set(14,14,14);
-      flag.position.set(-82,-2,6)
+      flag.scale.set(0.03,0.03,0.03);
+      flag.position.set(75,-8,6)
     })
-//monument loader
-let loader3 = new THREE.GLTFLoader();
-    loader3.load('./3dModels/taj_mahal/scene.gltf',function(gltf){
+    //Boat loader
+let loader5 = new THREE.GLTFLoader();
+    loader5.load('./3dModels/boat/scene.gltf',function(gltf){
       scene.add(gltf.scene);
-      taj_mahal =gltf.scene.children[0];
-      taj_mahal.scale.set(0.3,0.3,0.3);
-      taj_mahal.position.set(82,2,6)
+      boat =gltf.scene.children[0];
+      boat.scale.set(13,13,13);
+      boat.position.set(-100,0,-63)
     })
-//famous personality loader
+// monument loader
 let loader4 = new THREE.GLTFLoader();
-    loader4.load('./3dModels/mahtma_gandhi/scene.gltf',function(gltf){
+    loader4.load('./3dModels/michigan_central_station/scene.gltf',function(gltf){
       scene.add(gltf.scene);
-      gandhi =gltf.scene.children[0];
-      gandhi.scale.set(28,28,28);
-      gandhi.position.set(22,22,-94)
+      monument =gltf.scene.children[0];
+      monument.scale.set(2,2,2);
+      monument.position.set(22,0,-154)
+      monument.rotation.z = 3.02;
     })
-//instrument loader
+//lake loader
 let loader6 = new THREE.GLTFLoader();
-    loader6.load('./3dModels/sitar/scene.gltf',function(gltf){
+    loader6.load('./3dModels/cozy_lake/scene.gltf',function(gltf){
       scene.add(gltf.scene);
-      sitar =gltf.scene.children[0];
-      sitar.scale.set(28,28,28);
-      sitar.position.set(-82,192,-155)
-      sitar.rotation.z = 3.08;
+      lake =gltf.scene.children[0];
+      lake.scale.set(0.3,0.3,0.3);
+      lake.position.set(-180,-18,0)
+       lake.rotation.z = 4.00;
     //   taj_mahal.rotation.y = 1.02;
     })
 camera.position.z = 70;
